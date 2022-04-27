@@ -6,9 +6,16 @@
 //
 
 import Foundation
+import UIKit
 
-struct Person: Codable, Identifiable{
+struct Person:  Identifiable{
     var id: UUID
     var name: String
-    var photo: String
+    var photo: UIImage?
+    
+    init(){
+        id = UUID()
+        name = ""
+        
+    }
 }
