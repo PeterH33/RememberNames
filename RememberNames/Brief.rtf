@@ -1,0 +1,72 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;\f1\fnil\fcharset0 Menlo-Bold;\f2\fnil\fcharset0 Menlo-Regular;
+\f3\fnil\fcharset0 HelveticaNeue-Italic;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red212\green212\blue212;\red222\green43\blue91;
+\red156\green156\blue156;\red24\green24\blue28;\red235\green0\blue121;\red246\green246\blue239;\red72\green212\blue251;
+\red157\green101\blue255;}
+{\*\expandedcolortbl;;\cspthree\c0\c0\c0;\cssrgb\c86275\c86275\c86275;\cssrgb\c90588\c27059\c43137;
+\cspthree\c67596\c67596\c67596;\cssrgb\c12549\c12549\c14510;\cssrgb\c94902\c14118\c54902;\cssrgb\c97255\c97255\c94902;\cssrgb\c32941\c86275\c98824;
+\cssrgb\c68235\c50588\c100000;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww9000\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\li685\fi-686\ri-9282\sa320\partightenfactor0
+
+\f0\fs35\fsmilli17600 \cf2 \expnd0\expndtw0\kerning0
+Have you ever been to a conference or a meetup, chatted to someone new, then realized seconds after you walk away that you\'92ve already forgotten their name? You\'92re not alone, and the app you\'92re building today will help solve that problem and others like it.\
+Your goal is to build an app that asks users to import a picture from their photo library, then attach a name to whatever they imported. The full collection of pictures they name should be shown in a 
+\f1\b List
+\f0\b0 , and tapping an item in the list should show a detail screen with a larger version of the picture.\
+Breaking it down, you should:\
+\pard\pardeftab720\li685\fi-686\ri-9282\sa200\partightenfactor0
+\ls1\ilvl0\cf2 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+Wrap 
+\f1\b UIImagePickerController
+\f0\b0  so it can be used to select photos.\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+Detect when a new photo is imported, and immediately ask the user to name the photo.\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+Save that name and photo somewhere safe.\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+Show all names and photos in a list, sorted by name.\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+Create a detail screen that shows a picture full size.\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+Decide on a way to save all this data.\
+\pard\pardeftab720\li685\fi-686\ri-9282\sa320\partightenfactor0
+\cf2 We\'92ve covered how to save data to the user\'92s photo library using 
+\f1\b UIImageWriteToSavedPhotosAlbum()
+\f0\b0 , but saving an image to disk requires a small extra step: you need to convert your 
+\f1\b UIImage
+\f0\b0  to 
+\f1\b Data
+\f0\b0  by calling its 
+\f1\b jpegData()
+\f0\b0  method like this:\
+\pard\pardeftab720\li685\fi-686\ri-9282\partightenfactor0
+
+\f1\b\fs36 \cf5 \cb6 \shad\shadx0\shady-20\shadr0\shado0 \shadc0 if
+\f2\b0 \shad\shadx0\shady-20\shadr0\shado0 \shadc0  
+\f1\b \shad\shadx0\shady-20\shadr0\shado0 \shadc0 let
+\f2\b0 \shad\shadx0\shady-20\shadr0\shado0 \shadc0  jpegData = yourUIImage.\shad\shadx0\shady-20\shadr0\shado0 \shadc0 jpegData\shad\shadx0\shady-20\shadr0\shado0 \shadc0 (compressionQuality: \shad\shadx0\shady-20\shadr0\shado0 \shadc0 0.8\shad\shadx0\shady-20\shadr0\shado0 \shadc0 ) \{\
+    
+\f1\b \shad\shadx0\shady-20\shadr0\shado0 \shadc0 try
+\f2\b0 \shad\shadx0\shady-20\shadr0\shado0 \shadc0 ? jpegData.\shad\shadx0\shady-20\shadr0\shado0 \shadc0 write\shad\shadx0\shady-20\shadr0\shado0 \shadc0 (to: yourURL, options: [.atomic, .completeFileProtection])\
+\}\cf2 \
+\pard\pardeftab720\li685\fi-686\ri-9282\sa320\partightenfactor0
+
+\f0\fs35\fsmilli17600 \cf2 \cb1 \shad0 The 
+\f1\b compressionQuality
+\f0\b0  parameter can be any value between 0 (very low quality) and 1 (maximum quality); something like 0.8 gives a good trade off between size and quality.\
+You can use Core Data for this project if you want to, but it isn\'92t required \'96 a simple JSON file written out to the documents directory is fine, although you will need to add a custom conformance to 
+\f1\b Comparable
+\f0\b0  to get array sorting to work.\
+If you 
+\f3\i do
+\f0\i0  choose to use Core Data, make sure you don\'92t save the actual image into the database because that\'92s not efficient. Core Data or not, the optimal thing to do is generate a new 
+\f1\b UUID
+\f0\b0  for the image filename then write it to the documents directory, and store that 
+\f1\b UUID
+\f0\b0  in your data model.\
+Remember, you already know everything you need to make this work \'96 good luck!}
