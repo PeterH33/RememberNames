@@ -17,6 +17,7 @@
 		4C9A47C52819872D00CDD3A8 /* Brief.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4C9A47C42819872D00CDD3A8 /* Brief.rtf */; };
 		4C9A47C7281988BB00CDD3A8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9A47C6281988BB00CDD3A8 /* ImagePicker.swift */; };
 		4C9FF39528199C7400E971A2 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9FF39428199C7400E971A2 /* Person.swift */; };
+		4CB16552281AECC10047534B /* LocationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB16551281AECC10047534B /* LocationFetcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		4C9A47C42819872D00CDD3A8 /* Brief.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Brief.rtf; sourceTree = "<group>"; };
 		4C9A47C6281988BB00CDD3A8 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		4C9FF39428199C7400E971A2 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		4CB16551281AECC10047534B /* LocationFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFetcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				4C9A47C42819872D00CDD3A8 /* Brief.rtf */,
 				4C9A47C6281988BB00CDD3A8 /* ImagePicker.swift */,
 				4C9A47B62819869200CDD3A8 /* ContentView.swift */,
+				4CB16551281AECC10047534B /* LocationFetcher.swift */,
 				4C461DA5281A10DA00CCCDAC /* DetailView.swift */,
 				4C9FF39428199C7400E971A2 /* Person.swift */,
 				4C461DA7281A24A100CCCDAC /* EncodeDecodeFMext.swift */,
@@ -158,6 +161,7 @@
 			files = (
 				4C9A47C7281988BB00CDD3A8 /* ImagePicker.swift in Sources */,
 				4C461DA8281A24A100CCCDAC /* EncodeDecodeFMext.swift in Sources */,
+				4CB16552281AECC10047534B /* LocationFetcher.swift in Sources */,
 				4C461DA6281A10DA00CCCDAC /* DetailView.swift in Sources */,
 				4C461DA42819C8CA00CCCDAC /* PersonNamerView.swift in Sources */,
 				4C9A47B72819869200CDD3A8 /* ContentView.swift in Sources */,
@@ -294,6 +298,7 @@
 				DEVELOPMENT_TEAM = KPB567M9GJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "\"We need location for geolocation tagging of where you met someone\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -324,6 +329,7 @@
 				DEVELOPMENT_TEAM = KPB567M9GJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "\"We need location for geolocation tagging of where you met someone\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

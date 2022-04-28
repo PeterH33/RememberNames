@@ -6,11 +6,17 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct DetailView: View {
     let person : Person
+    @ObservedObject var people : People
     
+    //Binding for where the map starts, oriented around lat and long in the person, also the point where the drop pin goes
+    @State  var mapRegion : MKCoordinateRegion
+    @State  var personLocation : [CLLocationCoordinate2D] = []
     
+  
     
     var body: some View {
         Form{
@@ -22,8 +28,24 @@ struct DetailView: View {
                             .resizable()
                             .scaledToFit()
                     }
+                }//end image if let
+                
+                
+                
+                //This is going to bring up pins with everyone that was met, kinda a fun idea...
+                Map(coordinateRegion: $mapRegion, annotationItems: people.people) { location in
+                    MapAnnotation(coordinate: location.coordinate) {
+                        VStack {
+                            Image(systemName: "mappin")
+                                .foregroundColor(.red)
+                            Text(location.name)
+                        }
+                    }
                 }
-            }
+                
+                
+            }//end vstack
+            
         }
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 class People: ObservableObject{
     @Published var people = [Person]()
@@ -54,13 +55,18 @@ struct ContentView: View {
         }
     }
     
+    //Test delete later
+   
     
     var body: some View {
         NavigationView{
+            
             List{
                 ForEach(people.people) { person in
                     NavigationLink{
-                        DetailView(person: person)
+                        DetailView(person: person, people: people, mapRegion: MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: person.latitude, longitude: person.longitude), span: MKCoordinateSpan(latitudeDelta: 25, longitudeDelta: 25)))
+                       
+                       
                     } label: {
                         
                         HStack{

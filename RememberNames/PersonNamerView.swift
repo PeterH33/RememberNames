@@ -13,11 +13,22 @@ struct PersonNamerView: View {
     @State var newImage: UIImage
     @ObservedObject var people : People
     @State var newPerson = Person()
-   
     
+    
+    let locationFetcher = LocationFetcher()
     
     
     func save() {
+        
+        if let location = self.locationFetcher.lastKnownLocation {
+            newPerson.latitude = location.latitude
+            newPerson.longitude = location.longitude
+        } else {
+            print("Location did not load for saving, loc PersonNamerView.save()")
+        }
+        
+        
+        
         //convert the UIimage to a jpeg and store it in the documents file directory under the UUID for the file name
         let photoFileName = FileManager.documentsDirectory.appendingPathComponent("\(newPerson.id).jpeg")
         if let jpegData = newImage.jpegData(compressionQuality: 0.8) {
@@ -43,8 +54,8 @@ struct PersonNamerView: View {
         VStack{
             
             Image(uiImage: newImage)
-                    .resizable()
-                    .scaledToFit()
+                .resizable()
+                .scaledToFit()
             
             TextField("Name", text: $newPerson.name)
             //TODO default the cursor to this text field and make hitting return execute the dismiss, also turn off suggestions and auto correct for this field
@@ -60,6 +71,7 @@ struct PersonNamerView: View {
             .contentShape(Rectangle())
             .disabled(newPerson.name == "")
         }
+        .onAppear(perform: self.locationFetcher.start)
     }
 }
 
