@@ -8,7 +8,11 @@
 import Foundation
 import UIKit
 
-struct Person:  Identifiable{
+struct Person:  Identifiable, Comparable{
+    static func < (lhs: Person, rhs: Person) -> Bool {
+        lhs.name < rhs.name
+    }
+    
     var id: UUID
     var name: String
     var photo: UIImage?
@@ -18,4 +22,5 @@ struct Person:  Identifiable{
         name = ""
         
     }
+    
 }

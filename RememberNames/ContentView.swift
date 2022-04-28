@@ -21,6 +21,7 @@ struct ContentView: View {
     // @State private var image: Image?
     @State private var newPerson = Person()
     @StateObject var people : People = People()
+    let storageFile = "Storage.json"
     
     func removeItems(at offsets: IndexSet) {
         people.people.remove(atOffsets: offsets)

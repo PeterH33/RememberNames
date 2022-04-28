@@ -26,6 +26,7 @@ struct PersonNamerView: View {
             Button{
                 newPerson.photo = newImage
                 people.people.append(newPerson)
+                people.people.sort()
                 //Dismiss View
                 presentationMode.wrappedValue.dismiss()
                 
