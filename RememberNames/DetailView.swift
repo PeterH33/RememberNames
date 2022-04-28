@@ -10,14 +10,18 @@ import SwiftUI
 struct DetailView: View {
     let person : Person
     
+    
+    
     var body: some View {
         Form{
             VStack{
                 Text(person.name)
-                if let unwrappedPhoto = person.photo{
-                    Image(uiImage: unwrappedPhoto)
-                        .resizable()
-                        .scaledToFit()
+                if let unwrappedURL = person.photo{
+                    if let unwrappedUIImage = person.loadImage(url: unwrappedURL) {
+                        Image(uiImage: unwrappedUIImage)
+                            .resizable()
+                            .scaledToFit()
+                    }
                 }
             }
         }

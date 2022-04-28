@@ -15,6 +15,13 @@ extension FileManager {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
+    
+   
+        static var documentsDirectory: URL {
+            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            return paths[0]
+        }
+    
 
     //example call ** let test: String? = FileManager.default.decode("Message.txt") **
     func decode<T: Codable>(_ fromFile: String) -> T? {

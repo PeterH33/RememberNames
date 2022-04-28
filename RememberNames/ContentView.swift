@@ -9,7 +9,23 @@ import SwiftUI
 
 class People: ObservableObject{
     @Published var people = [Person]()
+    let savePath = FileManager.documentsDirectory.appendingPathComponent("SavedPeople")
+    
+    init() {
+        do {
+            //trys to load up the data from the save file path on initial load.
+            let data = try Data(contentsOf: savePath)
+            people = try JSONDecoder().decode([Person].self, from: data)
+        } catch {
+            people = []
+            print("Data failed to load or no data existed. loc People class init()")
+        }
+    }//end init
 }
+
+
+
+
 
 struct ContentView: View {
     //image picker states
@@ -21,10 +37,21 @@ struct ContentView: View {
     // @State private var image: Image?
     @State private var newPerson = Person()
     @StateObject var people : People = People()
-    let storageFile = "Storage.json"
+    
+    
+    
+    
     
     func removeItems(at offsets: IndexSet) {
         people.people.remove(atOffsets: offsets)
+        //Add in a removal of the image file so that the documents directory dosnt bloat.
+        do {
+            let data = try JSONEncoder().encode(people.people)
+            //Note .compelteFileprotection option encrypts the data so that it can only be read when the phone is unlocked. But alone it will not do anything if the phone is already unlocked and someone looks at the program, that requires an unlock screen in app
+            try data.write(to: people.savePath, options: [.atomic, .completeFileProtection])
+        } catch {
+            print("Unable to save data. Loc ContentView.removeItems()")
+        }
     }
     
     
@@ -37,19 +64,22 @@ struct ContentView: View {
                     } label: {
                         
                         HStack{
-                            if let unwrapped = person.photo{
-                                Image(uiImage: unwrapped)
-                                    .resizable()
-                                    .frame(width: 104, height: 72)
-                                    .clipShape(Capsule())
-                                    .overlay(
-                                        Capsule()
-                                            .strokeBorder(.white, lineWidth: 1)
-                                    )
-                                    .accessibilityHidden(true)
+                            if let unwrappedURL = person.photo{
+                                if let unwrappedUIImage = person.loadImage(url: unwrappedURL) {
+                                    Image(uiImage: unwrappedUIImage)
+                                        .resizable()
+                                        .frame(width: 104, height: 72)
+                                        .clipShape(Capsule())
+                                        .overlay(
+                                            Capsule()
+                                                .strokeBorder(.white, lineWidth: 1)
+                                        )
+                                        .accessibilityHidden(true)
+                                    
+                                    Spacer()
+                                    Text(person.name)
+                                }
                             }
-                            Spacer()
-                            Text(person.name)
                         }//End Hstack
                     }//end label
                 }//End foreach
@@ -84,10 +114,7 @@ struct ContentView: View {
         
     }
     
-    func save(){
-        print("Save function ******")
-        
-    }
+    
     
     
     
