@@ -22,7 +22,7 @@ struct PersonNamerView: View {
                     .scaledToFit()
             
             TextField("Name", text: $newPerson.name)
-            Text("Name that person!")
+            //TODO default the cursor to this text field and make hitting return execute the dismiss, also turn off suggestions and auto correct for this field
             Button{
                 newPerson.photo = newImage
                 people.people.append(newPerson)
@@ -31,7 +31,10 @@ struct PersonNamerView: View {
                 
             }label: {
                 Text("Save Person")
+                    .padding(20)
             }
+            .contentShape(Rectangle())
+            .disabled(newPerson.name == "")
         }
     }
 }
