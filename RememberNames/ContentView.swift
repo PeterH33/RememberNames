@@ -14,7 +14,7 @@ class People: ObservableObject{
     
     init() {
         do {
-            //trys to load up the data from the save file path on initial load.
+            //tries to load up the data from the save file path on initial load.
             let data = try Data(contentsOf: savePath)
             people = try JSONDecoder().decode([Person].self, from: data)
         } catch {

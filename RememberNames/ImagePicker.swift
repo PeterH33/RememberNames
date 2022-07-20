@@ -4,10 +4,10 @@
 //
 //  Created by Peter Hartnett on 3/11/22.
 //
-//This is from Paul Hudsons 100 days of swiftui days 63,63. It might be able to simply be dropped into anything to allow for picking images from the users photos library... pretty ugly code that needs to go away
+//This is from Paul Hudsons 100 days of swiftUI days 62-67. It might be able to simply be dropped into anything to allow for picking images from the users photos library... pretty ugly code that needs to go away
 
 
-// Useage, showingImagePicker is just a state to track it
+// Usage, showingImagePicker is just a state to track it
 //  input image is the image that it loads
 //  .sheet(isPresented: $showingImagePicker) {
 //  ImagePicker(image: $inputImage)
